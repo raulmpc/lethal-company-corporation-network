@@ -3,7 +3,7 @@
 **Projeto acadêmico • Redes de Computadores • 2026 • Cisco Packet Tracer**  
 **Resultado da avaliação: nota máxima** 🏆
 
-![Visão geral do projeto](infografico-rede.png)
+![Visão geral do projeto](topologia-rede.svg)
 
 ## Sobre o projeto
 
@@ -78,11 +78,11 @@ Esse teste demonstrou **redundância física** (enlaces alternativos) e **adapta
 
 **Infográfico da infraestrutura**
 
-![Resumo da infraestrutura](infografico-rede.png)
+![Resumo da infraestrutura](topologia-rede.svg)
 
 **Portal WEB acessado de outra filial**
 
-![Portal corporativo no navegador do Packet Tracer](portal-web.png)
+*Captura do portal WEB: será adicionada ao repositório junto com os demais anexos.*
 
 A apresentação com diagramas, conceitos e testes está no arquivo [`apresentacao-tecnica.pdf`](apresentacao-tecnica.pdf).
 

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-label="Topologia de rede com três prédios, roteamento RIPv2, servidor FTP corporativo, portal WEB e firewall do Financeiro">
+<defs><style>
+  .bg{fill:#0b1624}.title{font:700 34px Arial,sans-serif;fill:#eef6fc}.sub{font:17px Arial,sans-serif;fill:#9db4c8}
+  .card{fill:#172b40;stroke:#4a718f;stroke-width:2}.h{font:700 22px Arial,sans-serif;fill:#eaf4ff}.t{font:16px Arial,sans-serif;fill:#bdd5e7}
+  .tech{font:700 17px Arial,sans-serif;fill:#80d8ff}.line{stroke:#6de4a4;stroke-width:6;fill:none}.lbl{font:700 16px Arial,sans-serif;fill:#9ff0c4}
+  .accent{fill:#6de4a4}.pill{fill:#0c3544;stroke:#3b8496}
+</style></defs>
+<rect class="bg" width="1200" height="720"/>
+<text class="title" x="60" y="65">LETHAL COMPANY CORPORATION</text>
+<text class="sub" x="60" y="95">Laboratório Cisco Packet Tracer · Redes de Computadores · RIPv2 + VLAN + ASA</text>
+<!-- enlaces seriais triangulares -->
+<path class="line" d="M345 215 L860 215 L600 525 Z"/>
+<rect class="pill" x="520" y="190" width="166" height="34" rx="12"/><text class="lbl" x="603" y="213" text-anchor="middle">A ↔ B · 10.0.0.0/30</text>
+<rect class="pill" x="332" y="356" width="160" height="34" rx="12"/><text class="lbl" x="412" y="379" text-anchor="middle">A ↔ C · /30</text>
+<rect class="pill" x="718" y="356" width="160" height="34" rx="12"/><text class="lbl" x="798" y="379" text-anchor="middle">B ↔ C · /30</text>
+<!-- cards -->
+<rect class="card" x="65" y="132" rx="22" width="360" height="246"/>
+<text class="h" x="93" y="175">PRÉDIO A</text>
+<text class="tech" x="93" y="206">RTR-A-01 · ISR4331</text>
+<text class="t" x="93" y="242">LAN: 192.168.10.0/24</text>
+<text class="t" x="93" y="271">Visitantes: 192.168.11.0/24</text>
+<text class="t" x="93" y="302">DHCP · DNS · FTP corporativo</text>
+<text class="t" x="93" y="332">ADM · RH · Comercial</text>
+<rect class="card" x="775" y="132" rx="22" width="360" height="246"/>
+<text class="h" x="803" y="175">PRÉDIO B</text>
+<text class="tech" x="803" y="206">RTR-B-01 · ISR4331</text>
+<text class="t" x="803" y="242">LAN: 192.168.20.0/24</text>
+<text class="t" x="803" y="271">Visitantes: 192.168.21.0/24</text>
+<text class="t" x="803" y="302">DHCP · Portal WEB</text>
+<text class="t" x="803" y="332">Jurídico · Logística · Vendas</text>
+<rect class="card" x="401" y="455" rx="22" width="398" height="204"/>
+<text class="h" x="431" y="494">PRÉDIO C</text>
+<text class="tech" x="431" y="520">RTR-C-01 · ISR4331</text>
+<text class="t" x="431" y="546">LAN: 192.168.30.0/24</text>
+<text class="t" x="431" y="571">Financeiro: VLAN 40 · 192.168.40.0/24</text>
+<text class="t" x="431" y="597">ASA 5505 → FTP restrito: 192.168.1.2</text>
+<text class="t" x="431" y="623">Estoque · Compras · Financeiro · TI</text>
+<text class="sub" x="60" y="694">Enlaces seriais em triângulo proporcionam caminhos alternativos; RIPv2 atualiza as rotas após falhas.</text>
+</svg>

@@ -1,109 +1,117 @@
-# Lethal Company Corporation — Infraestrutura de Redes
+# 🌐 Lethal Company Corporation — Redes Corporativas
 
-**Projeto acadêmico • Redes de Computadores • 2026 • Cisco Packet Tracer**  
-**Resultado da avaliação: nota máxima** 🏆
+**Projeto acadêmico | Redes de Computadores | Cisco Packet Tracer | 2026**  
+🏆 **Avaliação: nota máxima**
 
-![Visão geral do projeto](topologia-rede.svg)
+> Simulação de uma infraestrutura corporativa em três prédios, com serviços de rede, segmentação, firewall e redundância de rotas. Projeto educacional desenvolvido em equipe.
 
-## Sobre o projeto
+![Topologia dos três prédios da Lethal Company Corporation](assets/topologia-rede.svg)
 
-Simulação de uma infraestrutura corporativa distribuída em **três prédios**, com endereçamento IPv4, serviços internos, acesso de visitantes, segmentação de rede, controle por firewall e roteamento dinâmico com caminho alternativo. Desenvolvido em equipe como atividade acadêmica, utilizando **Cisco Packet Tracer**.
+### Explore o projeto
 
-> **Aviso:** trata-se de um laboratório educacional. Os IPs são privados e as contas presentes no arquivo `.pkt` são de demonstração, **não apropriadas para uso real**.
-
-## Visão geral
-
-| Prédio | Departamentos | Computadores | Serviços / recursos |
-|---|---|---:|---|
-| **A** | Administrativo, RH, Comercial | 9 | DHCP, DNS, FTP corporativo, Wi-Fi visitantes |
-| **B** | Jurídico, Logística, Vendas | 9 | DHCP, portal WEB, Wi-Fi visitantes |
-| **C** | Estoque, Compras, Financeiro, TI | 12 | DHCP, VLAN 40, firewall ASA 5505, FTP restrito |
-
-Além dos 30 PCs, o cenário inclui dois notebooks de visitantes, três roteadores Cisco ISR4331, quatro switches Catalyst 3650 e enlaces de fibra e seriais.
-
-## Endereçamento de redes
-
-| Rede | Função |
+| Recurso | Conteúdo |
 |---|---|
-| `192.168.10.0/24` | Corporativo — Prédio A |
-| `192.168.11.0/24` | Visitantes — Prédio A |
-| `192.168.20.0/24` | Corporativo — Prédio B |
-| `192.168.21.0/24` | Visitantes — Prédio B |
-| `192.168.30.0/24` | Corporativo — Prédio C |
+| 📦 [Abrir a simulação (.pkt)](packet-tracer/Lethal_Company_Corporation.pkt) | Arquivo original para Cisco Packet Tracer |
+| 📖 [Arquitetura e segurança](docs/ARQUITETURA_E_SEGURANCA.md) | Decisões técnicas, fluxos de comunicação, VLAN, ASA e RIP |
+| 🧪 [Roteiro de testes](docs/ROTEIRO_DE_TESTES.md) | Comandos para DHCP, DNS, FTP, WEB, ACLs e redundância |
+| 📊 [Apresentação em PDF](docs/apresentacao-tecnica.pdf) | Slides e infográficos do trabalho |
+| 🖼️ [Infográfico da rede](assets/infografico-rede.png) | Resumo visual da infraestrutura |
+
+## Objetivo
+
+Simular uma empresa com **três prédios interligados**, cada um com departamentos, computadores recebendo IPv4 por DHCP e acesso a serviços corporativos. A solução também inclui:
+
+- Redes Wi-Fi de visitantes nos prédios A e B, com **restrição de acesso ao FTP corporativo**.
+- **Servidor exclusivo do Financeiro** protegido por Cisco ASA 5505 e VLAN 40.
+- **Roteamento dinâmico RIPv2** entre os prédios, com rotas alternativas quando um enlace falha.
+- Conectividade com fibra nas conexões de servidores e rede principal.
+
+## Estrutura da organização
+
+| Prédio | Departamentos | PCs | Serviços |
+|---|---|---:|---|
+| **A** | Administrativo, RH e Comercial | 9 | DHCP, DNS e FTP corporativo, visitantes Wi-Fi |
+| **B** | Jurídico, Logística e Vendas | 9 | DHCP, servidor WEB, visitantes Wi-Fi |
+| **C** | Estoque, Compras, Financeiro e TI | 12 | DHCP, VLAN 40, ASA 5505 e FTP restrito |
+
+**Ambiente:** 30 PCs corporativos, dois notebooks de visitantes, três roteadores Cisco ISR4331 e switches Catalyst 3650, entre outros dispositivos.
+
+## Redes e endereçamento
+
+| Sub-rede | Uso |
+|---|---|
+| `192.168.10.0/24` | Rede corporativa — A |
+| `192.168.11.0/24` | Visitantes — A |
+| `192.168.20.0/24` | Rede corporativa — B |
+| `192.168.21.0/24` | Visitantes — B |
+| `192.168.30.0/24` | Rede corporativa — C |
 | `192.168.40.0/24` | Financeiro — VLAN 40 |
-| `192.168.1.0/24` | Servidor exclusivo protegido pelo ASA |
+| `192.168.1.0/24` | Rede protegida do servidor do Financeiro |
 
-Os enlaces entre os roteadores foram divididos em redes `/30`:
+Os três enlaces seriais utilizam **redes /30**: `10.0.0.0/30` (A–B), `10.0.0.4/30` (B–C) e `10.0.0.8/30` (C–A).
 
-| Enlace | Rede | IPs das extremidades |
+## Tecnologias aplicadas
+
+**DHCP e DHCP Relay** para atribuição automática de IPv4; **DNS** para resolução de nomes; **FTP** para transferência de arquivos; **HTTP** para o portal; **IEEE 802.1Q** para trunk e VLAN; **ACLs** para controle de acesso; **Cisco ASA 5505** protegendo o serviço Financeiro; e **RIPv2** para propagação dinâmica de rotas.
+
+O servidor DNS (`192.168.10.10`) resolve `ftp.corporation.test` para `192.168.10.3`. O portal WEB do Prédio B responde em `http://192.168.20.3`.
+
+## Segurança: decisões e resultados
+
+**Visitantes:** os roteadores A e B utilizam ACLs para impedir acesso ao FTP corporativo a partir das redes de convidados. Os testes da simulação confirmaram o bloqueio.
+
+**Financeiro:** os PCs estão na **VLAN 40** (`192.168.40.0/24`), separados dos demais departamentos do Prédio C. O firewall **ASA 5505** controla o acesso ao FTP exclusivo (`192.168.1.2`). Nos testes realizados, os PCs do Financeiro conseguiram conectar; os testes com Estoque, Compras e TI não estabeleceram conexão.
+
+Essas políticas são baseadas em endereços de rede no laboratório; não substituem autenticação e outras proteções necessárias em produção.
+
+## Redundância RIPv2 — teste realizado
+
+A topologia **triangular** disponibiliza um enlace direto e um caminho alternativo entre cada par de prédios. Quando desativamos temporariamente o enlace **A–B**, a rota para a rede do Prédio B mudou:
+
+| Estado | Próximo salto no RTR-A-01 | Métrica RIP |
 |---|---|---|
-| A ↔ B | `10.0.0.0/30` | `.1` e `.2` |
-| B ↔ C | `10.0.0.4/30` | `.5` e `.6` |
-| C ↔ A | `10.0.0.8/30` | `.9` e `.10` |
+| Enlace direto ativo | `10.0.0.2` (B) | 1 salto |
+| Enlace A–B desativado | `10.0.0.9` (C) | 2 saltos |
+| Enlace recuperado | `10.0.0.2` (B) | 1 salto |
 
-## Tecnologias e protocolos
+Durante a falha simulada, o computador **JUR1 (Prédio B)** continuou acessando o FTP corporativo no **Prédio A**, por meio do caminho B → C → A. O teste demonstra **redundância física** e **convergência do roteamento**, não uma troca necessariamente instantânea.
 
-- **DHCP e DHCP Relay** — endereçamento automático dos clientes com um servidor DHCP em cada prédio; relay para redes distintas, incluindo a VLAN 40.
-- **DNS** — servidor em `192.168.10.10`, resolução de `ftp.corporation.test` para `192.168.10.3`.
-- **FTP** — serviço corporativo compartilhado entre funcionários dos três prédios.
-- **HTTP** — portal WEB da Lethal Company Corporation, hospedado no Prédio B.
-- **VLAN / IEEE 802.1Q** — VLAN 40 dedicada ao Financeiro e enlace trunk para o roteador C.
-- **ACL / Cisco ASA 5505** — filtragem de visitantes e restrição ao FTP exclusivo do Financeiro.
-- **RIPv2** — roteamento dinâmico entre três roteadores, com `no auto-summary`.
+## Evidências visuais
 
-## Segurança: rede do Financeiro
+![Infográfico com tecnologias, serviços e segmentos da rede](assets/infografico-rede.png)
 
-Os computadores do Financeiro ficam na **VLAN 40** (`192.168.40.0/24`), com gateway `192.168.40.1`. O acesso ao servidor exclusivo `192.168.1.2` passa pelo firewall Cisco ASA 5505, que contém uma ACL permitindo tráfego da rede autorizada para o servidor.
+**Portal corporativo acessado entre prédios:**
 
-Nos testes da simulação, os três PCs do Financeiro conseguiram acessar o serviço; computadores de Estoque, Compras e TI não estabeleceram conexão.
+![Página do portal WEB da empresa aberta no Cisco Packet Tracer](assets/portal-web.png)
 
-Os roteadores A e B também usam ACLs para impedir o acesso de notebooks visitantes ao FTP corporativo. Esses controles são baseados em redes de origem e não substituem autenticação de usuários em produção.
+## Como reproduzir os testes
 
-## Roteamento e redundância: teste prático
+1. Abra o arquivo [`packet-tracer/Lethal_Company_Corporation.pkt`](packet-tracer/Lethal_Company_Corporation.pkt) no Cisco Packet Tracer compatível.
+2. Confira a tabela de roteamento com `show ip route` e as interfaces com `show ip interface brief`.
+3. Valide DNS, FTP, WEB, DHCP e restrições de acesso com o [roteiro de testes](docs/ROTEIRO_DE_TESTES.md).
+4. Para a redundância, desative **temporariamente** a `Serial0/1/0` do RTR-A-01, observe a rota via C e **restaure o enlace com `no shutdown`** após o teste.
 
-A topologia de roteadores foi montada em **triângulo**:
+## Organização do repositório
 
 ```text
-       RTR-A-01 -------- RTR-B-01
-           \              /
-            \            /
-              RTR-C-01
+.
+├── README.md
+├── assets/
+│   ├── topologia-rede.svg
+│   ├── infografico-rede.png
+│   └── portal-web.png
+├── docs/
+│   ├── ARQUITETURA_E_SEGURANCA.md
+│   ├── ROTEIRO_DE_TESTES.md
+│   └── apresentacao-tecnica.pdf
+└── packet-tracer/
+    └── Lethal_Company_Corporation.pkt
 ```
 
-O enlace A ↔ B foi temporariamente desativado. Após a convergência do **RIPv2**, a tabela do roteador A mostrou a rota para `192.168.20.0/24` passando por `10.0.0.9` (roteador C), com métrica RIP 2. Mesmo assim, um PC do Prédio B continuou acessando o FTP do Prédio A. Ao restaurar o enlace, voltou a rota direta via `10.0.0.2`, métrica 1.
+## Observação sobre o laboratório
 
-Esse teste demonstrou **redundância física** (enlaces alternativos) e **adaptação de rotas** pelo RIPv2.
-
-## Evidências da simulação
-
-**Infográfico da infraestrutura**
-
-![Infográfico com os principais componentes e serviços da infraestrutura](infografico-rede.png)
-
-**Portal WEB acessado de outra filial**
-
-![Portal WEB da Lethal Company Corporation acessado pelo navegador do Packet Tracer](portal-web.png)
-
-A apresentação com diagramas, conceitos e testes está no arquivo [`apresentacao-tecnica.pdf`](apresentacao-tecnica.pdf).
-
-## Como abrir e testar
-
-1. Instale o Cisco Packet Tracer (projeto salvo originalmente em **8.2.2**).
-2. Abra [`Lethal_Company_Corporation.pkt`](Lethal_Company_Corporation.pkt).
-3. Verifique as interfaces e o RIPv2 com `show ip interface brief`, `show ip protocols` e `show ip route`.
-4. Faça testes de conectividade (`ping`) e acesso HTTP/FTP entre prédios.
-5. Para repetir a redundância, desligue **temporariamente** a `Serial0/1/0` do `RTR-A-01` e observe a mudança para o próximo salto `10.0.0.9`. Reative com `no shutdown` e salve.
-
-Veja o roteiro detalhado em [`ROTEIRO_DE_TESTES.md`](ROTEIRO_DE_TESTES.md).
-
-## Principais aprendizados
-
-Planejamento IPv4 e subnetting, instalação de módulos seriais NIM-2T, DHCP/DHCP Relay, configuração de VLAN e trunk, ACLs, firewall ASA, RIP e análise de falhas de comunicação. Durante a implementação, foram resolvidos problemas de pool DHCP, perda de subinterface após reinicialização e alcance do Wi-Fi no modo físico do simulador.
-
-## Observação sobre credenciais
-
-O `.pkt` contém usuários e senhas **fictícios do laboratório**. Não utilize essas credenciais em redes, serviços ou contas reais. Arquivos privados do grupo com listas de senhas não fazem parte deste repositório.
+O `.pkt` contém contas e senhas **fictícias de demonstração**. Não reutilize essas credenciais em sistemas reais. A apostila privada e a lista de senhas do grupo **não estão publicadas** aqui.
 
 ---
 
-**Projeto educacional desenvolvido em equipe.**
+**Projeto acadêmico realizado em equipe e apresentado com nota máxima.**

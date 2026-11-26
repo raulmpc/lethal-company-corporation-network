@@ -78,11 +78,11 @@ Esse teste demonstrou **redundância física** (enlaces alternativos) e **adapta
 
 **Infográfico da infraestrutura**
 
-![Resumo da infraestrutura](topologia-rede.svg)
+![Infográfico com os principais componentes e serviços da infraestrutura](infografico-rede.png)
 
 **Portal WEB acessado de outra filial**
 
-*Captura do portal WEB: será adicionada ao repositório junto com os demais anexos.*
+![Portal WEB da Lethal Company Corporation acessado pelo navegador do Packet Tracer](portal-web.png)
 
 A apresentação com diagramas, conceitos e testes está no arquivo [`apresentacao-tecnica.pdf`](apresentacao-tecnica.pdf).
 
